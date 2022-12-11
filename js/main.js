@@ -41,6 +41,7 @@ let gameContainer = document.querySelector(".game");
 let scissors = document.querySelector(".scissors");
 let rock = document.querySelector(".rock");
 let paper = document.querySelector(".paper");
+let pickSound = document.querySelector(".pick-sound");
 
 function createPaper(parent) {
   let div = document.createElement("div");
@@ -77,12 +78,15 @@ function createRock(parent) {
 
 scissors.addEventListener("click", (el) => {
   startGame(scissors.className);
+  pickSound.play();
 });
 rock.addEventListener("click", (el) => {
   startGame(rock.className);
+  pickSound.play();
 });
 paper.addEventListener("click", (el) => {
   startGame(paper.className);
+  pickSound.play();
 });
 
 let result = document.querySelector(".result");

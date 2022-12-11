@@ -64,10 +64,9 @@ header div span {
   grid-template-areas: "paper scissors" "rock rock";
   gap: 20px;
 }
-.game .rock,
-.game .scissors,
-.game .paper {
-  padding: 20px;
+.rock,
+.scissors,
+.paper {
   width: 150px;
   aspect-ratio: 1;
   border-radius: 50%;
@@ -115,22 +114,13 @@ header div span {
   color: white;
   letter-spacing: 2px;
 }
-.result .paper img,
-.result .scissors img,
-.result .rock img {
-  width: 200px;
-}
 .result .paper,
 .result .scissors,
 .result .rock {
-  padding: 30px;
-  width: fit-content;
-  border-radius: 50%;
-  transition: 0.5s;
   margin: 50px auto 20px;
 }
 .result .computer-pick .blank {
-  width: 250px;
+  width: 120px;
   aspect-ratio: 1;
   border-radius: 50%;
   background-color: rgba(0, 0, 0, 0.2);
@@ -267,17 +257,6 @@ header div span {
   header div span {
     font-size: 2em;
   }
-  .result .paper,
-  .result .scissors,
-  .result .rock {
-    padding: 20px;
-  }
-  .result .paper img,
-  .result .scissors img,
-  .result .rock img {
-    padding: 20px;
-    width: 100px;
-  }
   .winner {
     box-shadow: 0 0 0 20px #cccccc33;
   }
@@ -305,8 +284,8 @@ header div span {
   .game .rock,
   .game .scissors,
   .game .paper {
-    width: 100px;
-    padding: 15px;
+    width: fit-content;
+    padding: 10px;
   }
   .game .rock img,
   .game .scissors img,
@@ -315,6 +294,7 @@ header div span {
     height: 75px;
   }
   .result {
+    margin-top: 20px;
     display: grid;
     grid-template-areas: "my-pick computer-pick" "final final";
     gap: 20px;
@@ -324,6 +304,7 @@ header div span {
     max-width: 120px;
     line-height: 1.5;
     font-size: 1em;
+    margin: auto;
   }
   .result .my-pick {
     grid-area: my-pick;
@@ -340,17 +321,6 @@ header div span {
   .result .final button {
     font-size: 1em;
   }
-  .result .paper,
-  .result .scissors,
-  .result .rock {
-    padding: 10px;
-  }
-  .result .paper img,
-  .result .scissors img,
-  .result .rock img {
-    padding: 10px;
-    width: 75px;
-  }
   .winner {
     box-shadow: 0 0 0 10px #cccccc22;
   }
@@ -362,6 +332,21 @@ header div span {
   }
 }
 @media (max-width: 500px) {
+  .result .rock,
+  .result .scissors,
+  .result .paper {
+    width: fit-content;
+    padding: 10px;
+  }
+  .result .rock img,
+  .result .scissors img,
+  .result .paper img {
+    padding: 20px;
+    height: 75px;
+  }
+  .result .computer-pick .blank {
+    width: 75px;
+  }
   .result .final h2 {
     font-size: 1.5em;
     margin-bottom: 10px;
