@@ -1,0 +1,379 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=Martian+Mono:wght@100;200;300;400;500;600;700;800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+:root {
+  --Radial-Gradient: linear-gradient(#1f3756, #141539);
+  --Scissors-Gradient: linear-gradient(0deg, #ec9e0e, #eca922);
+  --Paper-Gradient: linear-gradient(0deg, #4865f4, #5671f5);
+  --Rock-Gradient: linear-gradient(0deg, #dc2e4e, #dd405d);
+  --Lizard-Gradient: linear-gradient(0deg, #834fe3, #8c5de5);
+  --Cyan: linear-gradient(#40b9ce, #52bed1);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Martian Mono", monospace;
+}
+.background {
+  background-image: var(--Radial-Gradient);
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+body {
+  background-size: cover;
+  min-height: 100vh;
+  padding: 30px;
+}
+header {
+  width: 50%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  padding: 20px;
+}
+header div {
+  background-color: white;
+  padding: 20px 40px;
+  border-radius: 5px;
+  text-align: center;
+}
+header div p {
+  color: #011165;
+  font-weight: 700;
+  font-size: 0.8em;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+header div span {
+  color: #666;
+  font-size: 3.5em;
+  font-weight: bold;
+}
+.game {
+  text-align: center;
+  width: 100px;
+  margin: 50px auto;
+  display: grid;
+  justify-content: center;
+  grid-template-areas: "paper scissors" "rock rock";
+  gap: 20px;
+}
+.game .rock,
+.game .scissors,
+.game .paper {
+  padding: 20px;
+  width: 150px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transition: 0.5s;
+  cursor: pointer;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.paper {
+  background-image: var(--Paper-Gradient);
+  box-shadow: 0 8px 0 0 #1532c1;
+  grid-area: paper;
+}
+.scissors {
+  background-image: var(--Scissors-Gradient);
+  box-shadow: 0 8px 0 0 #ba6c0b;
+  grid-area: scissors;
+}
+.rock {
+  background-image: var(--Rock-Gradient);
+  box-shadow: 0 8px 0 0 #9d1d34;
+  grid-area: rock;
+}
+.rock img,
+.scissors img,
+.paper img {
+  background-color: #eee;
+  padding: 30px;
+  border-radius: 50%;
+}
+.result {
+  text-align: center;
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-evenly;
+}
+.result .my-pick,
+.result .computer-pick {
+  flex: 1;
+}
+.result h3 {
+  text-transform: uppercase;
+  color: white;
+  letter-spacing: 2px;
+}
+.result .paper img,
+.result .scissors img,
+.result .rock img {
+  width: 200px;
+}
+.result .paper,
+.result .scissors,
+.result .rock {
+  padding: 30px;
+  width: fit-content;
+  border-radius: 50%;
+  transition: 0.5s;
+  margin: 50px auto 20px;
+}
+.result .computer-pick .blank {
+  width: 250px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.2);
+  margin: 50px auto 20px;
+}
+.result .final {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.result .final h2 {
+  color: white;
+  font-size: 3em;
+  margin-bottom: 40px;
+}
+.result .final .won {
+  color: #4fdb58;
+}
+.result .final .lost {
+  color: #da3838;
+}
+.result .final button {
+  background-color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.winner {
+  box-shadow: 0 0 0 30px #cccccc33;
+  position: relative;
+}
+.winner::before {
+  content: "";
+  aspect-ratio: 1;
+  width: 100%;
+  padding: 75px;
+  border-radius: 50%;
+  background-color: #cccccc22;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.winner::after {
+  content: "";
+  width: 100%;
+  aspect-ratio: 1;
+  padding: 100px;
+  border-radius: 50%;
+  background-color: #cccccc11;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.result .final button:hover {
+  color: rgb(161, 6, 6);
+  transform: scale(1.1);
+}
+.rules {
+  border: 3px solid white;
+  border-radius: 5px;
+  background-color: transparent;
+  color: white;
+  padding: 5px 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 1em;
+  display: block;
+  cursor: pointer;
+  transition: 0.5s;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+.rules:hover {
+  transform: scale(1.1);
+}
+.overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+.popup {
+  background-color: white;
+  width: 300px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  padding: 50px;
+  border-radius: 15px;
+  z-index: 101;
+}
+.popup img {
+  width: 100%;
+}
+.popup h2 {
+  margin-bottom: 50px;
+  font-weight: bold;
+  font-size: 2em;
+  color: #011165;
+}
+.popup .fa-x {
+  position: absolute;
+  top: 30px;
+  font-size: 1.2em;
+  right: 30px;
+  color: #aaa;
+  cursor: pointer;
+}
+@media (max-width: 991px) {
+  header {
+    text-align: center;
+    width: fit-content;
+    flex-direction: column;
+    gap: 20px;
+  }
+  header div {
+    padding: 10px 20px;
+  }
+  header img {
+    height: 75px;
+  }
+  header div span {
+    font-size: 2em;
+  }
+  .result .paper,
+  .result .scissors,
+  .result .rock {
+    padding: 20px;
+  }
+  .result .paper img,
+  .result .scissors img,
+  .result .rock img {
+    padding: 20px;
+    width: 100px;
+  }
+  .winner {
+    box-shadow: 0 0 0 20px #cccccc33;
+  }
+  .winner::before {
+    padding: 50px;
+  }
+  .winner::after {
+    padding: 75px;
+  }
+  .result .computer-pick .blank {
+    width: 100px;
+  }
+}
+@media (max-width: 767px) {
+  header img {
+    height: 50px;
+  }
+
+  .game .bg > img {
+    width: 150px;
+  }
+  .game .bg {
+    width: 100%;
+  }
+  .game .rock,
+  .game .scissors,
+  .game .paper {
+    width: 100px;
+    padding: 15px;
+  }
+  .game .rock img,
+  .game .scissors img,
+  .game .paper img {
+    padding: 20px;
+    height: 75px;
+  }
+  .result {
+    display: grid;
+    grid-template-areas: "my-pick computer-pick" "final final";
+    gap: 20px;
+  }
+  .result .computer-pick h3,
+  .result .my-pick h3 {
+    max-width: 120px;
+    line-height: 1.5;
+    font-size: 1em;
+  }
+  .result .my-pick {
+    grid-area: my-pick;
+  }
+  .result .computer-pick {
+    grid-area: computer-pick;
+  }
+  .result .final {
+    grid-area: final;
+  }
+  .result .final h2 {
+    font-size: 2em;
+  }
+  .result .final button {
+    font-size: 1em;
+  }
+  .result .paper,
+  .result .scissors,
+  .result .rock {
+    padding: 10px;
+  }
+  .result .paper img,
+  .result .scissors img,
+  .result .rock img {
+    padding: 10px;
+    width: 75px;
+  }
+  .winner {
+    box-shadow: 0 0 0 10px #cccccc22;
+  }
+  .winner::before {
+    padding: 20px;
+  }
+  .winner::after {
+    display: none;
+  }
+}
+@media (max-width: 500px) {
+  .result .final h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  .result .final button {
+    padding: 5px 20px;
+    font-size: 0.8em;
+  }
+  .popup {
+    width: 90%;
+  }
+  .popup h2 {
+    font-size: 1.5em;
+  }
+}
