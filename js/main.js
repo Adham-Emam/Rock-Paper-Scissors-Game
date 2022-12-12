@@ -26,7 +26,7 @@ rulesButton.addEventListener("click", () => {
   rulesTitle.textContent = "Rules";
 
   let rulesImg = document.createElement("img");
-  rulesImg.setAttribute("src", "./images/image-rules.svg");
+  rulesImg.setAttribute("src", "./images/image-rules-bonus.svg");
 
   rules.appendChild(rulesTitle);
   rules.appendChild(deleteRules);
@@ -41,6 +41,8 @@ let gameContainer = document.querySelector(".game");
 let scissors = document.querySelector(".scissors");
 let rock = document.querySelector(".rock");
 let paper = document.querySelector(".paper");
+let lizard = document.querySelector(".lizard");
+let spock = document.querySelector(".spock");
 let pickSound = document.querySelector(".pick-sound");
 
 function createPaper(parent) {
@@ -75,6 +77,26 @@ function createRock(parent) {
   div.appendChild(icon);
   parent.appendChild(div);
 }
+function createLizard(parent) {
+  let div = document.createElement("div");
+  div.className = "lizard";
+
+  let icon = document.createElement("img");
+  icon.src = `images/icon-lizard.svg`;
+
+  div.appendChild(icon);
+  parent.appendChild(div);
+}
+function createSpock(parent) {
+  let div = document.createElement("div");
+  div.className = "spock";
+
+  let icon = document.createElement("img");
+  icon.src = `images/icon-spock.svg`;
+
+  div.appendChild(icon);
+  parent.appendChild(div);
+}
 
 scissors.addEventListener("click", (el) => {
   startGame(scissors.className);
@@ -86,6 +108,14 @@ rock.addEventListener("click", (el) => {
 });
 paper.addEventListener("click", (el) => {
   startGame(paper.className);
+  pickSound.play();
+});
+lizard.addEventListener("click", (el) => {
+  startGame(lizard.className);
+  pickSound.play();
+});
+spock.addEventListener("click", (el) => {
+  startGame(spock.className);
   pickSound.play();
 });
 
@@ -108,6 +138,10 @@ function startGame(pick) {
     createScissors(myPick);
   } else if (pick === "paper") {
     createPaper(myPick);
+  } else if (pick === "lizard") {
+    createLizard(myPick);
+  } else if (pick === "spock") {
+    createSpock(myPick);
   }
 
   let computerPickTitle = document.createElement("h3");
@@ -121,7 +155,7 @@ function startGame(pick) {
   generateComputerPick(blank, pick);
 }
 
-let choicesArray = ["scissors", "rock", "paper"];
+let choicesArray = ["scissors", "rock", "paper", "lizard", "spock"];
 
 function generateComputerPick(blank, myPick) {
   let randomIndex = Math.floor(Math.random() * choicesArray.length);
@@ -136,36 +170,47 @@ function generateComputerPick(blank, myPick) {
       createScissors(computerPick);
     } else if (randomPick === "paper") {
       createPaper(computerPick);
+    } else if (randomPick === "lizard") {
+      createLizard(computerPick);
+    } else if (randomPick === "spock") {
+      createSpock(computerPick);
     }
 
     // Win Chances
     if (myPick === "paper" && randomPick === "rock") {
       won();
+    } else if (myPick === "paper" && randomPick === "spock") {
+      won();
     } else if (myPick === "scissors" && randomPick === "paper") {
+      won();
+    } else if (myPick === "scissors" && randomPick === "lizard") {
       won();
     } else if (myPick === "rock" && randomPick === "scissors") {
       won();
+    } else if (myPick === "rock" && randomPick === "lizard") {
+      won();
+    } else if (myPick === "lizard" && randomPick === "spock") {
+      won();
+    } else if (myPick === "lizard" && randomPick === "paper") {
+      won();
+    } else if (myPick === "spock" && randomPick === "scissors") {
+      won();
+    } else if (myPick === "spock" && randomPick === "rock") {
+      won();
     }
     // Draw Chances
-    if (myPick === "paper" && randomPick === "paper") {
-      draw();
-    } else if (myPick === "scissors" && randomPick === "scissors") {
-      draw();
-    } else if (myPick === "rock" && randomPick === "rock") {
+    else if (myPick === randomPick) {
       draw();
     }
-    // lose Chances
-    if (myPick === "paper" && randomPick === "scissors") {
-      lost();
-    } else if (myPick === "scissors" && randomPick === "rock") {
-      lost();
-    } else if (myPick === "rock" && randomPick === "paper") {
+    // Lose Chances
+    else {
       lost();
     }
   }, 1000);
 }
 
 score.innerHTML = 0;
+
 function won() {
   let h2 = document.createElement("h2");
   h2.textContent = "You Won";

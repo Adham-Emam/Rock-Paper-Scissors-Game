@@ -58,16 +58,21 @@ header div span {
 .game {
   text-align: center;
   width: 100px;
-  margin: 50px auto;
+  margin: auto;
   display: grid;
   justify-content: center;
-  grid-template-areas: "paper scissors" "rock rock";
+  grid-template-areas:
+    "scissors scissors"
+    "spock paper"
+    "lizard rock";
   gap: 20px;
 }
 .rock,
 .scissors,
-.paper {
-  width: 150px;
+.paper,
+.lizard,
+.spock {
+  width: 120px;
   aspect-ratio: 1;
   border-radius: 50%;
   transition: 0.5s;
@@ -76,11 +81,16 @@ header div span {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 .paper {
   background-image: var(--Paper-Gradient);
   box-shadow: 0 8px 0 0 #1532c1;
   grid-area: paper;
+  margin-left: 50px;
+}
+.game .scissors {
+  transform: translateY(50px);
 }
 .scissors {
   background-image: var(--Scissors-Gradient);
@@ -92,12 +102,38 @@ header div span {
   box-shadow: 0 8px 0 0 #9d1d34;
   grid-area: rock;
 }
+.lizard {
+  background-image: var(--Lizard-Gradient);
+  box-shadow: 0 8px 0 0 #613ea7;
+  grid-area: lizard;
+}
+.spock {
+  background-image: var(--Cyan);
+  box-shadow: 0 8px 0 0 #2a7987;
+  grid-area: spock;
+  margin-right: 50px;
+}
 .rock img,
 .scissors img,
-.paper img {
+.paper img,
+.lizard img,
+.spock img {
+  z-index: 2;
+}
+.rock::before,
+.scissors::before,
+.paper::before,
+.lizard::before,
+.spock::before {
+  content: "";
+  padding: 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: #eee;
-  padding: 30px;
   border-radius: 50%;
+  z-index: 1;
 }
 .result {
   text-align: center;
@@ -116,7 +152,9 @@ header div span {
 }
 .result .paper,
 .result .scissors,
-.result .rock {
+.result .rock,
+.result .lizard,
+.result .spock {
   margin: 50px auto 20px;
 }
 .result .computer-pick .blank {
@@ -153,32 +191,7 @@ header div span {
   transition: 0.5s;
 }
 .winner {
-  box-shadow: 0 0 0 30px #cccccc33;
-  position: relative;
-}
-.winner::before {
-  content: "";
-  aspect-ratio: 1;
-  width: 100%;
-  padding: 75px;
-  border-radius: 50%;
-  background-color: #cccccc22;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.winner::after {
-  content: "";
-  width: 100%;
-  aspect-ratio: 1;
-  padding: 100px;
-  border-radius: 50%;
-  background-color: #cccccc11;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 20px #cccccc33, 0 0 0 40px #cccccc22, 0 0 0 60px #cccccc11;
 }
 .result .final button:hover {
   color: rgb(161, 6, 6);
@@ -257,17 +270,30 @@ header div span {
   header div span {
     font-size: 2em;
   }
-  .winner {
-    box-shadow: 0 0 0 20px #cccccc33;
-  }
-  .winner::before {
-    padding: 50px;
-  }
-  .winner::after {
-    padding: 75px;
-  }
+
   .result .computer-pick .blank {
     width: 100px;
+  }
+  .rock,
+  .scissors,
+  .paper,
+  .lizard,
+  .spock {
+    width: 100px;
+  }
+  .rock::before,
+  .scissors::before,
+  .paper::before,
+  .lizard::before,
+  .spock::before {
+    padding: 40px;
+  }
+  .rock img,
+  .scissors img,
+  .paper img,
+  .lizard img,
+  .spock img {
+    height: 50px;
   }
 }
 @media (max-width: 767px) {
@@ -283,15 +309,26 @@ header div span {
   }
   .game .rock,
   .game .scissors,
-  .game .paper {
+  .game .paper,
+  .game .lizard,
+  .game .spock {
     width: fit-content;
     padding: 10px;
   }
   .game .rock img,
   .game .scissors img,
-  .game .paper img {
+  .game .paper img,
+  .game .lizard img,
+  .game .spock img {
     padding: 20px;
     height: 75px;
+  }
+  .rock::before,
+  .scissors::before,
+  .paper::before,
+  .lizard::before,
+  .spock::before {
+    padding: 35px;
   }
   .result {
     margin-top: 20px;
@@ -321,26 +358,27 @@ header div span {
   .result .final button {
     font-size: 1em;
   }
-  .winner {
-    box-shadow: 0 0 0 10px #cccccc22;
-  }
-  .winner::before {
-    padding: 20px;
-  }
-  .winner::after {
-    display: none;
-  }
 }
 @media (max-width: 500px) {
+  .game .scissors {
+    transform: translatey(20px);
+  }
+  .game .paper,
+  .game .spock {
+    margin: 0;
+  }
   .result .rock,
   .result .scissors,
-  .result .paper {
+  .result .paper,
+  .result .lizard .result .spock {
     width: fit-content;
     padding: 10px;
   }
   .result .rock img,
   .result .scissors img,
-  .result .paper img {
+  .result .paper img,
+  .result .lizard img,
+  .result .spock img {
     padding: 20px;
     height: 75px;
   }
