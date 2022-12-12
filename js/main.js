@@ -26,7 +26,7 @@ rulesButton.addEventListener("click", () => {
   rulesTitle.textContent = "Rules";
 
   let rulesImg = document.createElement("img");
-  rulesImg.setAttribute("src", "./images/image-rules-bonus.svg");
+  rulesImg.setAttribute("src", "./images/image-rules.svg");
 
   rules.appendChild(rulesTitle);
   rules.appendChild(deleteRules);
